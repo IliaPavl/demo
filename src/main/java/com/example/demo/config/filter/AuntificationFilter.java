@@ -66,6 +66,7 @@ public class AuntificationFilter extends UsernamePasswordAuthenticationFilter {
         tokens.put("refresh_token", refresh_token);
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+
     }
 
     private String createTokens(User user, Algorithm algorithm, String valueSubject, HttpServletRequest request, Date date) throws NoSuchAlgorithmException {

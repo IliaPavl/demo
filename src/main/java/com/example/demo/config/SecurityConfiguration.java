@@ -38,15 +38,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         AuntificationFilter filter = new AuntificationFilter(authenticationManagerBean());
-        filter.setFilterProcessesUrl("/login");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/login/**","/api/link/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/company/**").hasAnyAuthority("Admin");
-        http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/company/**").hasAnyAuthority("Admin");
+//        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/company/**").hasAnyAuthority("Admin");
+//        http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/company/**").hasAnyAuthority("Admin");
         //http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/user/**").hasAnyAuthority("Admin");
         //http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/user/**").hasAnyAuthority("Admin");
         http.authorizeRequests().anyRequest().authenticated();
+        http.formLogin().permitAll();
         http.addFilter(filter);
         http.addFilterBefore(new AuthorizeFilter(), UsernamePasswordAuthenticationFilter.class);
     }
