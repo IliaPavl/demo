@@ -41,10 +41,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/login/**","/api/link/**").permitAll();
-//        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/company/**").hasAnyAuthority("Admin");
-//        http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/company/**").hasAnyAuthority("Admin");
-        //http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/user/**").hasAnyAuthority("Admin");
-        //http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/user/**").hasAnyAuthority("Admin");
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/company/**").hasAnyAuthority("Admin");
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/company/**").hasAnyAuthority("Admin");
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/user/**").hasAnyAuthority("Admin");
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/user/**").hasAnyAuthority("Admin");
         http.authorizeRequests().anyRequest().authenticated();
         http.formLogin().permitAll();
         http.addFilter(filter);
